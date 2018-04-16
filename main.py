@@ -118,28 +118,6 @@ def getSquareSegmentDistance(p, p1, p2):
     		res = 0
    
     return math.sqrt(res)
-    """
-    x = p1['x']
-    y = p1['y']
-
-    dx = p2['x'] - x
-    dy = p2['y'] - y
-
-    if dx != 0 or dy != 0:
-        t = ((p['x'] - x) * dx + (p['y'] - y) * dy) / (dx * dx + dy * dy)
-
-        if t > 1:
-            x = p2['x']
-            y = p2['y']
-        elif t > 0:
-            x += dx * t
-            y += dy * t
-
-    dx = p['x'] - x
-    dy = p['y'] - y
-
-    return dx * dx + dy * dy
-	"""
 
 def simplifySlopeDistance(points, tolerance):
 	#tolerance = tolerance / 2
@@ -167,7 +145,7 @@ def simplifySlopeDistance(points, tolerance):
 
 def simplifyDouglasPeucker(points, tolerance):
     length = len(points)
-    markers = [0] * length  # Maybe not the most efficent way?
+    markers = [0] * length 
 
     first = 0
     last = length - 1
@@ -198,9 +176,7 @@ def simplifyDouglasPeucker(points, tolerance):
 
             first_stack.append(index)
             last_stack.append(last)
-
-        # Can pop an empty array in Javascript, but not Python, so check
-        # the length of the list first
+            
         if len(first_stack) == 0:
             first = None
         else:
@@ -279,19 +255,6 @@ def simplifyPAA(points, tolerace):
 				errorRes.append(abs(y[index3-1] - resPAA[index_tmp-1]))
 				index_tmp += 1		
 		error = float (max(errorRes)) / max(y)
-		'''
-		errorRes = 0
-		index_tmp = 1
-		for index3 in range(1, length+1):
-			tmp = index_tmp * length / float(paa_size)
-			if (abs(index3 - tmp) >= 1):
-				errorRes += abs(y[index3 - 1] - res[index_tmp-1])
-			else:
-				if (abs(y[index3 - 1] - res[index_tmp-1]) > errorRes):
-					errorRes += abs(y[index3 - 1] - res[index_tmp-1])
-				index_tmp += 1	
-		error = errorRes / length
-		'''
 		paa_size += 1
 	paa_size -= 1
 	keys = ['x', 'y']
@@ -354,20 +317,16 @@ def simplify(points, tolerance=1, alg=0):
 def readAllcsv(direct):
 	count = 1
 	countRow = 1
-	#outputFile = open(output, 'w')
 	for filename in os.listdir(direct):
 		if count == 1 and filename.endswith(".csv"):
 			os.chdir(direct)
 			with open(filename) as csvData:
 				csvReader = csv.reader(csvData)
 				for row in csvReader:
-				# '30241', '32020', '36295', '38904', '35956'
-				# '30241', '30253', '28014', '32020', '31332', '31651', '35323', '36295', '30996', '35956'
 					if countRow >= 24000 and countRow <=24100:
 						with open(row[0], "a") as myfile:
 							countRow += 1
 							for i in range(1,13):
-								#myfile.write(filename[6:-4])
 								if i < 10:
 									partWrite = filename[6:-4] + '0' + str(i)
 								else:
@@ -521,33 +480,11 @@ def main():
 		os.chdir('./rawData')
 	else:
 		readAllcsv('./rawData')
-	
-	#dictList0 = []
-	#dictList1 = []
-	#dictList2 = []
-	#dictList3 = []
-	#dictList4 = []
-	#dictList5 = []
-	#dictList6 = []
-	#dictList7 = []
-	#dictList8 = []
-	#dictList9 = []
+
 	
 	dictList = []
 	
 	keys = ['file', 'x', 'y']
-	# 30241 Ames
-	# 30253 Chicago
-	# 28014 Minneapolis
-	# 32020 Kansas City
-	# 31332 Lafayette
-	# 31651 Denver
-	# 35323 LA
-	# 36295 Dallas
-	# 30996 New York
-	# 35956 Phoenix
-	#nameList = ['30241', '32020', '25480', '38904', '30616']
- 	#nameList = ['8286', '316']
  	
 	for name in range(100):
 		with open(str(name + 24000)) as csvData:
@@ -556,47 +493,9 @@ def main():
 				temp = [ name, int(row[0]), int(row[1])]
 				#stdevList.append(int(row[1]))
 				dictList.append(dict(zip(keys, temp)))
-		'''
-				if name == '30241':
-					dictList0.append(dict(zip(keys, temp)))
-				elif name == '32020':
-					dictList1.append(dict(zip(keys, temp)))
-				elif name == '25480':
-					dictList2.append(dict(zip(keys, temp)))
-				elif name == '38904':
-					dictList3.append(dict(zip(keys, temp)))
-				elif name == '30616':
-					dictList4.append(dict(zip(keys, temp)))
-		
-				elif name == '31651':
-					dictList5.append(dict(zip(keys, temp)))
-				elif name == '35323':
-					dictList6.append(dict(zip(keys, temp)))
-				elif name == '36295':
-					dictList7.append(dict(zip(keys, temp)))
-				elif name == '30996':
-					dictList8.append(dict(zip(keys, temp)))
-				else:
-					dictList9.append(dict(zip(keys, temp)))
-		'''
-	#print "standard deviation : ", np.std(np.array(stdevList))
 	
 	sortDict = []
-	
-	'''		
-	sortDict0 = changeTimeIndex(dictList0)
-	sortDict1 = changeTimeIndex(dictList1)
-	sortDict2 = changeTimeIndex(dictList2)	
-	sortDict3 = changeTimeIndex(dictList3)
-	sortDict4 = changeTimeIndex(dictList4)
-	
-	sortDict5 = changeTimeIndex(dictList5)
-	sortDict6 = changeTimeIndex(dictList6)
-	sortDict7 = changeTimeIndex(dictList7)	
-	sortDict8 = changeTimeIndex(dictList8)
-	sortDict9 = changeTimeIndex(dictList9)
-	'''		
-	
+		
 	for index in range(100):
 		tmpList = []
 		for element in dictList:
@@ -604,16 +503,11 @@ def main():
 				tmpList.append(dict(zip(['x', 'y'], [element['x'], element['y']])))
 		sortDict.append(changeTimeIndex(tmpList))
 	
-	#print sortDict1
-	#myargs = getopts(argv)
-	
 	resList = []
 	resListDR = []
 	tolerance = [5 , 10, 15, 20, 25, 30]
-	#sortList = [sortDict0, sortDict1, sortDict2, sortDict3, sortDict4, sortDict5, sortDict6, sortDict7, sortDict8, sortDict9]
 	
-	#for j in range(10):
-	os.chdir('/Users/shawnteng/Desktop/TimeSeries')
+	os.chdir('..')
 	for j in range(100):
 		for tolen in tolerance:
 			for i in range(3):
@@ -653,13 +547,7 @@ def main():
 							myfile.write(tmp)
 							myfile.write('\n')
 						resListDR.append(simplify(sortDict[j], 0.92, i))
-	
-	#resList1 = simplify(sortDict1, tolen, 1)
-	#resList2 = simplify(sortDict2, tolen, 0)
-	#sortList = [sortDict1, sortDict2]
-	#resList = [resList0, resList1, resList2, resList3, resList4, resList5, resList6, resList7, resList8, resList9]
-	#resList = [resList1, resList2]
-	
+		
 	res = []
 	resDR = []
 	keyRes = ['loc1', 'loc2', 'tableName', 'disFunc', 'tolen', 'value']

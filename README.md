@@ -1,5 +1,7 @@
 ABDIS 2018
+
 Title: Location-Awareness in Time Series Compression
+
 Datasource: https://climatedataguide.ucar.edu/climate-data/gpcc-global-precipitation-climatology-centre
 
 Thanks a lot for the kind help from Prof.Andreas Züfle, Prof. Goce Trajcevski and Prof. Diego Klabjan

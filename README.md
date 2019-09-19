@@ -9,3 +9,5 @@ Thanks a lot for the kind help from Prof.Andreas Züfle, Prof. Goce Trajcevski a
 If having any question about the topic or the code, please contact me without hesitation.
 
 E-mail address: xuteng@iastate.edu 
+
+NOTE: PLEASE CHECK UPDATED VERSION OF CODE @compression-alg repo !

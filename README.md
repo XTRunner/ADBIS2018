@@ -1,6 +1,6 @@
 ABDIS 2018
 
-(NOTE: PLEASE CHECK UPDATED VERSION OF CODE AT compression-alg Repo)
+(NOTE: PLEASE CHECK UPDATED VERSION OF CODE AT [compression-alg](https://github.com/XTRunner/compression-alg) Repo)
 
 Title: Location-Awareness in Time Series Compression
 
